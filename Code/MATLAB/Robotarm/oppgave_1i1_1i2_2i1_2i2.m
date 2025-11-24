@@ -21,7 +21,7 @@ L4.offset = pi/2;
 % Kun fire første joints
 robot4DOF = SerialLink([L1 L2 L3 L4]);
 
-% Develop the transformation mapping End-effector to base (first 4 joints only) 
+% Transformasjonsmatriser for de første 4 leddene
 T01 = [cos(theta_1) -sin(theta_1)*cos(alpha_1) sin(theta_1)*sin(alpha_1) a1*cos(theta_1);
     sin(theta_1) cos(theta_1)*cos(alpha_1) -cos(theta_1)*sin(alpha_1) a1*sin(theta_1);
     0 sin(alpha_1) cos(alpha_1) d1;
@@ -44,7 +44,7 @@ T34 = [cos(th4) -sin(th4)*cos(alpha_4) sin(th4)*sin(alpha_4) a4*cos(th4);
     0 sin(alpha_4) cos(alpha_4) d4;
     0 0 0 1];
 
-% Symbolsk utledning
+% Symbolsk utledning av fullstendig transformasjonsmatrise
 OT4 = T01*T12*T23*T34;
 
 % Forenkle symbolsk

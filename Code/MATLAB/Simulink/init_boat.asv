@@ -1,0 +1,167 @@
+%{
+% resten av parametrene dine som før (b, kvu, kou, Ts, osv.)
+
+% Båtparametre
+b        = 0.30;      % avstand propeller
+Dv       = 0.6;       % surge-demping
+Dr       = 0.8;       % yaw-demping
+K_T      = 12;        % thrust-gain
+betaT    = 0.25;      % thrust linear/quad mix (0..1)
+deadband = 0.05;      % aktuator dødgang
+tau_m    = 0.10;      % motorlag [s]
+
+% Kommandoskala (v,omega -> uL,uR)
+vmax     = 1.2;  omegamax = 4.0;
+kvu      = 1.0 / vmax;
+kou      = 1.6 / omegamax;
+
+% Strøm (verdensramme)
+v_cx = 0.00;  v_cy = 0.10;  % 0.1 m/s langs +y
+
+% Pure Pursuit/Stanley-verdier
+%lookahead = 0.9;    % m
+%v_des     = 0.75;   % m/s
+%omega_max = 3.5;    % rad/s (begrensning i følger)
+Ts        = 0.02;   % diskret sampletid for kontroller
+Tstop     = 2280;     % simtid
+
+% lag rute i grid-koordinater (indekser), 0.1 m per celle:
+init = [ 1  1  0];    % startnode (grid)
+goal = [50 20  0];    % mål (≈ [5.0 m, 2.0 m])
+
+[W, lp] = m_lattice_pool_nav(init, goal);  % <- W er Nx2 i meter
+
+% startpose avledet fra første segment:
+x0 = W(1,1); 
+y0 = W(1,2);
+psi0 = atan2(W(2,2)-W(1,2), W(2,1)-W(1,1));  % peker mot første etappe
+
+% --- Pure Pursuit tuning + hale forbi mål ---
+t = W(end,:) - W(end-3,:);  t = t/norm(t);
+W = [W; W(end,:) + 0.5*t];      % 0.5 m "forbi" målet
+
+lookahead = 0.40;               % m
+v_des     = 0.30;               % m/s
+omega_max = 2.00;               % rad/s
+k_v_goal  = 1.5;                % fartsreduksjon nær mål
+
+assignin('base','W',W);
+assignin('base','lookahead',lookahead);
+assignin('base','v_des',v_des);
+assignin('base','omega_max',omega_max);
+assignin('base','k_v_goal',k_v_goal);
+
+%}
+
+%% --- Velg modus ---
+useSnake = true;    % true = snake-mode, false = lattice-mode
+
+
+% Båtparametre
+b        = 0.30;      % avstand propeller
+Dv       = 0.6;       % surge-demping
+Dr       = 0.8;       % yaw-demping
+K_T      = 12;        % thrust-gain
+betaT    = 0.25;      % thrust linear/quad mix (0..1)
+deadband = 0.05;      % aktuator dødgang
+tau_m    = 0.10;      % motorlag [s]
+
+Ts        = 0.02;   % diskret sampletid for kontroller
+Tstop     = 2280;     % simtid
+
+% Kommandoskala (v,omega -> uL,uR)
+vmax     = 1.2;  omegamax = 4.0;
+kvu      = 1.0 / vmax;
+kou      = 1.6 / omegamax;
+
+% Strøm (verdensramme)
+v_cx = 0.00;  v_cy = 0.10;  % 0.1 m/s langs +y
+
+%{
+% --- Definer kartet (20x50 celler = 2.0 m x 5.0 m ved 0.1 m/cell)
+pool = zeros(20,50);         % 0=fri, 1=vegg
+res  = 0.1;
+
+% --- Start/mål i METER (ikke grid-indekser)
+%init = [0.10 0.10 0];        % 10 cm fra hjørnet
+%goal = [4.90 1.90 0];        % 10 cm fra andre hjørnet
+
+% --- Lattice: start/mål i GRID (0.1 m per celle; 5x2 m -> 50x20 celler)
+init_g = [ 1  1  0];     % [ix iy ith]
+goal_g = [50 20  0];     % [ix iy ith]
+
+[W, lp] = m_lattice_pool_nav(init_g, goal_g);   % <-- GRID-versjonen
+
+% --- Kall planneren med Map/Resolution og Grid=3
+%[W, psi, lp, info] = m_lattice_pool_nav(init, goal, ...
+%    'Map', pool, 'Resolution', res, 'Grid', 3, 'Plot', true);
+
+
+
+% --- Startpose avledet fra første segment:
+x0   = W(1,1);
+y0   = W(1,2);
+psi0 = atan2(W(2,2)-W(1,2), W(2,1)-W(1,1));
+
+% --- Hale forbi mål
+t = W(end,:) - W(end-3,:);  t = t/norm(t);
+W = [W; W(end,:) + 0.5*t];
+
+% --- PP-parametre
+lookahead = 0.40;
+v_des     = 0.30;
+omega_max = 2.00;
+k_v_goal  = 1.5;
+
+assignin('base','W',W);
+assignin('base','lookahead',lookahead);
+assignin('base','v_des',v_des);
+assignin('base','omega_max',omega_max);
+assignin('base','k_v_goal',k_v_goal);
+%}
+
+% --- Planlegging ---
+if useSnake
+    %% === SLANGE-DEKNING ===
+    disp('MODE: Snake coverage');
+    W = m_snake_coverage(5.0, 2.0, ...
+        'LaneSpacing', 0.25, ...
+        'Margin',      0.10, ...
+        'TurnRadius',  0.125, ...
+        'ds',          0.05);
+    
+    figure; plot(W(:,1),W(:,2),'-'); axis equal; grid on; title('Snake-path');
+    hold on; plot(W(1,1),W(1,2),'go','markerfacecolor','g');
+    
+    x0   = W(1,1);
+    y0   = W(1,2);
+    psi0 = atan2(W(2,2)-W(1,2), W(2,1)-W(1,1));
+
+    lookahead = 0.35;  v_des = 0.25;  omega_max = 2.0;  k_v_goal = 1.5;
+
+else
+    %% === LATTICE-NAVIGASJON ===
+   %% === LATTICE-NAVIGASJON (GRID-variant) ===
+disp('MODE: Lattice target');
+
+init_g = [1 1 0];        % grid-indekser (0.1 m/cell)
+goal_g = [50 20 0];
+
+[W, lp] = m_lattice_pool_nav(init_g, goal_g);   % grid-variant
+
+x0   = W(1,1);
+y0   = W(1,2);
+psi0 = atan2(W(2,2)-W(1,2), W(2,1)-W(1,1));
+
+lookahead = 0.40;  v_des = 0.30;  omega_max = 2.0;  k_v_goal = 1.5;
+end
+
+%% --- Eksponer til Simulink ---
+assignin('base','W',W);
+assignin('base','x0',x0);
+assignin('base','y0',y0);
+assignin('base','psi0',psi0);
+assignin('base','lookahead',lookahead);
+assignin('base','v_des',v_des);
+assignin('base','omega_max',omega_max);
+assignin('base','k_v_goal',k_v_goal);

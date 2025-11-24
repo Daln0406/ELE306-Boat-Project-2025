@@ -199,16 +199,21 @@ q_traj = [ ...
     q_traj_dump(2:end,:) ...
     ];
 
-%% VIDEOOPPTAK
+% Animasjon og eventuell lagring av video
+lagre_video = false; % False = ingen lagring av video, true = lagring av video som .mp4
+robot.delay = 0; % Ingen innebygd pause per frame
 
-v = VideoWriter('hav_sweep_boat.mp4','MPEG-4');
-v.FrameRate = 60;
-open(v);
+if lagre_video
+    v = VideoWriter('motion_planning_example.mp4','MPEG-4');
+    v.FrameRate = 60;
+    open(v);
+end
 
 fig = figure('Color','w','Name','Motion planning example');
 robot.plot(q_traj(1,:), ...
     'workspace', [-0.9 0.9 -0.5 0.9 0 1.2], ...
-    'view', [55 20], 'scale', 0.6);
+    'view', [55 20], 'scale', 0.6, ...
+    'delay', 0); % Ingen delay i plot-animasjonen
 hold on;
 
 % Tegn båt
@@ -237,9 +242,13 @@ xlabel('X (m)'); ylabel('Y (m)'); zlabel('Z (m)');
 for i = 1:size(q_traj,1)
     robot.animate(q_traj(i,:));
     drawnow;
-    frame = getframe(fig);
-    writeVideo(v, frame);
+    if lagre_video
+        frame = getframe(fig);
+        writeVideo(v, frame);
+    end
 end
 
-close(v);
-fprintf('Video lagret som hav_sweep_boat.mp4\n');
+if lagre_video
+    close(v);
+    fprintf('Video lagret som hav_sweep_boat.mp4\n');
+end

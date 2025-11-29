@@ -25,7 +25,7 @@ For å kjøre simulering:
 
 ---
 
-## 2. `Robotarm/`
+## 2. [`Robotarm/`](https://github.com/Daln0406/ELE306-Boat-Project-2025/tree/main/Code/MATLAB/Robotarm)
 **Kinematikk for robotarmen**
 
 Inneholder:

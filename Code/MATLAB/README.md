@@ -29,13 +29,15 @@ For å kjøre simulering:
 **Kinematikk for robotarmen**
 
 Inneholder:
-- Fremoverkinematikk (FK)
-- DH-parametere
-- Test av armbevegelser og enkle trajektorier  
+- Differensiell kinematikk
+- Fremoverkinematikk
+- Invers kinematikk
+- Motion planning example
 
 Brukes til å verifisere armens bevegelse.
 
 For å kjøre simulering:
+- Kun copy-paste inn i MATLAB
 
 ---
 

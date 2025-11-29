@@ -10,7 +10,7 @@ Under følger en oversikt over hva hver mappe inneholder.
 
 ---
 
-## 📁 1. `TotalSimuleringMobilBaseOgRobotarm/`
+## 1. `TotalSimuleringMobilBaseOgRobotarm/`
 **Full simulering av båt + robotarm**
 
 Hovedmappen for komplett simulering av hele systemet.  
@@ -24,7 +24,7 @@ Dette er mappen som brukes for å generere resultater og figurer til rapporten.
 
 ---
 
-## 📁 2. `ArmKinematikk/`
+## 2. `ArmKinematikk/`
 **Kinematikk for robotarmen**
 
 Inneholder:
@@ -36,17 +36,7 @@ Brukes til å verifisere armens bevegelse før integrasjon med hovedsimulatoren.
 
 ---
 
-
-
-
-
-
-
-# Her ligger koder for Robotarm, TotalSimuleringMobilBaseOgRobotarm og simulink.
-1. ### MATLAB - TotalSimuleringMobilBaseOgRobotarm  
-Dette er mappe for MATLAB simulering med navigasjon, lokalisering og robotarm. 
-2. ARM
-3. ### Simulink
+## 3. Simulink   
 Simulink er __IKKE__ brukt i sluttresultatet av prosjektet. I en tidlig fase av prosjektet forsøkte vi oss på simulink men det var noe utfordrende og vi kom ikke helt i mål med dette. Vi valgte likevell i legge den ved om det er intressant men prosjektet er fullverdig uten simulink.
 Kjøring av simulink:
   1. kjør init_boat

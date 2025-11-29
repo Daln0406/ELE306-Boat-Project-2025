@@ -25,6 +25,7 @@ R_align = [ 0  0  1;   % x_tool = Y_world
             1  0  0;   % y_tool = Z_world
             0  1  0];  % z_tool = X_world
 
+% Ønsket målposisjon
 P_goal = [0.45; 0.30; -0.30];
 
 % Full ønsket pose (posisjon + orientering)

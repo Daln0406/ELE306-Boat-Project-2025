@@ -24,7 +24,7 @@ K_ct   = 2.0;                  % kryss-spor forsterkning
 % Båtgeometri / aktuator
 w = 0.30;                      % avstand thrustere [m]
 omega_max = 6.0;               % rotasjonsmetning [rad/s] 
-tau_act   = 0.30;              % tidkonstant aktuator (1. ordens)
+tau_act   = 0.30;              % tidkonstant aktuator 
 
 % Strøm (konstant)
 v_current = [0.0, -0.1];       % [x,y] --> sqr(x^2 + y^2) = ||a|| m/s 
@@ -653,4 +653,5 @@ s = [0; cumsum(vecnorm(diff(W,1,1),2,2))];
 snew = (0:ds:s(end)).';
 W2 = [interp1(s, W(:,1), snew, 'linear'), interp1(s, W(:,2), snew, 'linear')];
 if norm(W2(end,:)-W(end,:))>1e-9, W2 = [W2; W(end,:)]; end
+
 end

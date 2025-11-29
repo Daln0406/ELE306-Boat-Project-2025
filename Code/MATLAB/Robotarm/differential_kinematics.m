@@ -17,8 +17,9 @@ L4.offset = pi/2;
 
 % Sett sammen leddene til et SerialLink-objekt
 robot = SerialLink([L1 L2 L3 L4 L5],'name','5DOF');
+
 % Håv/endeffektor
-robot.tool = transl(0,0,0.20); % Håven stikker 20 cm ut fra håndleddet
+robot.tool = transl(0,0,0.20); % Håven stikker 20 cm ut fra håndleddet i endeffektorens Z-akse
 
 % Jacobian
 q_fixed = [0.3 -0.5 0.6 -0.2 0.4]; % Faste leddvinkler

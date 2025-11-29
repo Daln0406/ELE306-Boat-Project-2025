@@ -19,7 +19,7 @@ L4.offset = pi/2;
 robot = SerialLink([L1 L2 L3 L4 L5], 'name', '5DOF');
 
 % Håv/end-effektor
-robot.tool = transl(0,0,0.20); % Håven stikker 20 cm ut fra håndleddet
+robot.tool = transl(0,0,0.20); % Håven stikker 20 cm ut fra håndleddet i endeffektorens Z-retning
 
 R_align = [ 0  0  1;   % x_tool = Y_world
             1  0  0;   % y_tool = Z_world

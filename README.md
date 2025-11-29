@@ -12,7 +12,7 @@ for plastplukking, slik den er beskrevet i prosjektspesifikasjonen for ELE306 Ro
 Simuleringen kobler sammen:
 
 - Kinematikk og kontroll av **mobil base (båt med to thrustere)**
-- Kinematikk og bevegelse for **robotarm** (plast-håv)
-- **Navigasjon og kontroll** (LOS/PID) for å følge bane og/eller søkemønster
+- Kinematikk og bevegelse for **robotarm** 
+- **Navigasjon og kontroll** (LOS/PID) for å følge bane og søkemønster
 - **Sensordata og estimat** (IMU, strøm, EKF)
 - Visualisering av båt- og armbevegelse over tid

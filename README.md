@@ -4,7 +4,7 @@ Autonomous plastic-collecting boat with manipulator - ELE306 HVL.
 Utviklet av Bendik Bergquist Pedersen, Lars Folgerø Dale, Lars Helge Aamodt og Sebastian Alveberg
 
 > ELE306 Robotics semester project – Robot design challenge 4:  
-> *Small boat with manipulator for picking plastic from the sea* :contentReference[oaicite:0]{index=0}  
+> *Small boat with manipulator for picking plastic from the sea*   
 
 Denne mappen inneholder vår **fullstendige MATLAB-simulering** av den autonome båten med robotarm
 for plastplukking, slik den er beskrevet i prosjektspesifikasjonen for ELE306 Robotikk.   

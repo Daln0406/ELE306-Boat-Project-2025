@@ -19,9 +19,9 @@ L4.offset =  pi/2;
 robot = SerialLink([L1 L2 L3 L4 L5], 'name', '5DOF');
 
 % HÅV
-robot.tool = transl(0, 0, 0.20); % håven stikker 20 cm ut fra håndleddet
+robot.tool = transl(0, 0, 0.20); % håven stikker 20 cm ut fra håndleddet i endeffektorens Z-akse
 
-% BÅT
+% Båt
 boat_length = 1.0;
 boat_width  = 0.4;
 boat_height = 0.2;
@@ -97,7 +97,7 @@ x0 = p_start(1);
 y0 = p_start(2);
 z0 = p_start(3);
 
-delta = atan2(y0, -x0);   % Sender (x0, y0) til linjen Y=0 med NEGATIV X
+delta = atan2(y0, -x0); % Sender (x0, y0) til linjen Y = 0 med negativ X
 q_start(1) = q_start(1) + delta;
 
 % Oppdatert startposisjon
@@ -107,32 +107,31 @@ x_start = p_start(1);
 y_start = p_start(2);
 z_start = p_start(3);
 
-%% TRAJEKTORIER
-
+% Trajektorier
 % Antall steg
-N_start_to_lift = 60;   % start -> løftepose i starten
-N_lift_to_left  = 60;   % løftepose -> start plukk
-N_sweep         = 90;   % sveip venstre -> høyre
-N_right_to_lift = 45;   % slutt -> løft + orienterings-rotasjon
-N_lift_to_start = 90;   % løft -> start + hold orientering
+N_start_to_lift = 60; % start -> løftepose i starten
+N_lift_to_left  = 60; % løftepose -> start plukk
+N_sweep         = 90; % sveip venstre -> høyre
+N_right_to_lift = 45; % slutt -> løft + orienterings-rotasjon
+N_lift_to_start = 90; % løft -> start + hold orientering
 
 % 0) Start -> løftepose over start (kun posisjon, samme orientering som
 % q_start), joint space, jtraj
-dq_pos = q_lift - q_right;          % ledd-delta for løft over høyre punkt
-q_start_lift = q_start + dq_pos;    % tilsvarende løft fra start
+dq_pos = q_lift - q_right; % ledd-delta for løft over høyre punkt
+q_start_lift = q_start + dq_pos; % tilsvarende løft fra start
 
 q_traj0 = jtraj(q_start, q_start_lift, N_start_to_lift);
 
 % 1) Løftepose -> start plukk
 q_traj1 = jtraj(q_start_lift, q_left, N_lift_to_left);
 
-% 2) Kartesisk sveip T_left → T_right med IK
+% 2) Kartesisk sveip T_left → T_right med invers kinematikk
 T_sweep = ctraj(T_left, T_right, N_sweep);
 q_traj2 = zeros(N_sweep, robot.n);
 q_prev  = q_left;
 
 % Går gjennom alle posene i T_sweep, løser invers kinematikk med forrige
-% løsning som startgjetning og lagrer leddvinklene i q_traj2
+% Løsning som startgjetning og lagrer leddvinklene i q_traj2
 for i = 1:N_sweep
     q_sol = robot.ikine(T_sweep(:,:,i), q_prev, 'mask', mask);
     if isempty(q_sol)
@@ -145,7 +144,7 @@ end
 
 % 3) Etter sveip: løft og roter håven slik at X peker opp, og lås denne orienteringen
 
-q_end_sweep = q_traj2(end,:);   % Siste leddposisjon fra sveip
+q_end_sweep = q_traj2(end,:); % Siste leddposisjon fra sveip
 
 % Start fra løfteposen q_lift (posisjon over sluttpunktet) og legg på pitch i ledd 4
 wrist_pitch = -pi/4; % Vinkel på håven
@@ -184,7 +183,7 @@ q_traj = [ ...
     q_traj4(2:end,:) ...
     ];
 
-% TØMME HÅVEN (X-akse peker ned)
+% Tømme håven (X-akse peker ned)
 N_dump = 60; % Antall steg for tømming
 q_end = q_traj(end,:); % Siste konfig før tømming
 

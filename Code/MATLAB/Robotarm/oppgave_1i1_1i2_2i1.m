@@ -62,7 +62,3 @@ T_fk = robot4DOF.fkine(q).T;
 
 fprintf('\nForskjell (OT4 - fkine):\n');
 vpa(T_num - T_fk, 6)
-
-% Posisjonsvektor
-disp('Posisjonsligning p(q)');
-p = OT4(1:3,4)

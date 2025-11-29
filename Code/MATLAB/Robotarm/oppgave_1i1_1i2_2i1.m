@@ -66,31 +66,3 @@ vpa(T_num - T_fk, 6)
 % Posisjonsvektor
 disp('Posisjonsligning p(q)');
 p = OT4(1:3,4)
-
-% Beregning av Jacobian
-q = [theta_1 theta_2 theta_3 theta_4];
-disp('Jacobian Jv(q)');
-Jv = simplify(jacobian(p, q)) % Jacobian for lineær hastighet
-
-% Symbolsk uttrykk for leddhastighet
-syms qdot1 qdot2 qdot3 qdot4 real
-qdot = [qdot1; qdot2; qdot3; qdot4];
-
-% Uttrykk for kartesisk hastighet
-disp('Hastighetsligning pdot = Jv * qdot');
-pdot = simplify(Jv * qdot)
-
-% Setter inn faktiske tallverdier settes inn for theta og qdot
-subs_vals = {theta_1, theta_2, theta_3, theta_4, qdot1, qdot2, qdot3, qdot4};
-num_vals = {0.2, -0.6, 0.9, -0.3, 0.1, -0.2, 0.15, 0.05};
-
-% Numerisk Jacobian
-Jv_num = double(subs(Jv, subs_vals(1:4), num_vals(1:4)));
-
-% Numerisk kartestisk hastighet
-pdot_num = double(subs(pdot, subs_vals, num_vals));
-
-disp('Numerisk Jacobian:');
-disp(Jv_num);
-disp('Numerisk hastighet pdot:');
-disp(pdot_num);

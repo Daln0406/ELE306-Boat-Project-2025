@@ -6,7 +6,7 @@ Utviklet av Bendik Bergquist Pedersen, Lars Folgerø Dale, Lars Helge Aamodt og 
 > ELE306 Robotics semester project – Robot design challenge 4:  
 > *Small boat with manipulator for picking plastic from the sea*   
 
-Denne mappen inneholder vår **fullstendige MATLAB-simulering** av den autonome båten med robotarm
+Denne repository'en inneholder vår **fullstendige MATLAB-simulering** av den autonome båten med robotarm
 for plastplukking, slik den er beskrevet i prosjektspesifikasjonen for ELE306 Robotikk.   
 
 Simuleringen kobler sammen:

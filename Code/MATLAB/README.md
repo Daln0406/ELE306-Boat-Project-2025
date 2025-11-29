@@ -37,7 +37,7 @@ Inneholder:
 Brukes til å verifisere armens bevegelse.
 
 For å kjøre simulering:
-- Kun copy-paste inn i MATLAB
+- Copy-paste inn i MATLAB
 
 ---
 

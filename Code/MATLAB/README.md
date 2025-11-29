@@ -1,7 +1,7 @@
 # MATLAB-kode – ELE306 Båtprosjekt 2025
 
 Denne mappen inneholder all MATLAB-kode som brukes i ELE306 Robotikk-semesterprosjektet:
-**Autonom båt med robotarm for innsamling av plast**.
+**Small boat with manipulator for picking plastic from the sea**.
 
 Koden er organisert i flere undermapper.
 

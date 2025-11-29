@@ -31,9 +31,11 @@ P_goal = [0.45; 0.30; -0.30];
 % Full ønsket pose (posisjon + orientering)
 T_goal = transl(P_goal') * r2t(R_align);
 
-mask = [1 1 1 0 0 1]; % Mask for håndtering av underaktuert arm
+% Mask for håndtering av underaktuert arm
+mask = [1 1 1 0 0 1];
 
-q0 = [0 0 0 0 0]; % Startgjetning
+% Startgjetning
+q0 = [0 0 0 0 0];
 
 % Invers kinematikk
 q_sol = robot.ikine(T_goal, q0, 'mask', mask);

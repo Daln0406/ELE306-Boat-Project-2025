@@ -3,8 +3,7 @@
 Denne mappen inneholder all MATLAB-kode som brukes i ELE306 Robotikk-semesterprosjektet:
 **Autonom båt med robotarm for innsamling av plast**.
 
-Koden er organisert i flere undermapper som hver representerer en del av systemet:
-mobilbase, robotarm, navigasjon, plastsimulering og full-systemtester.
+Koden er organisert i flere undermapper.
 
 Under følger en oversikt over hva hver mappe inneholder.
 
@@ -20,7 +19,9 @@ Inneholder:
 - Navigasjon/søk
 - Live-plotting og visualisering  
 
-Dette er mappen som brukes for å generere resultater og figurer til rapporten.
+Dette er mappen som har blitt brukt for å generere resultater og figurer til rapporten.
+
+For å kjøre simulering:
 
 ---
 
@@ -32,7 +33,9 @@ Inneholder:
 - DH-parametere
 - Test av armbevegelser og enkle trajektorier  
 
-Brukes til å verifisere armens bevegelse før integrasjon med hovedsimulatoren.
+Brukes til å verifisere armens bevegelse.
+
+For å kjøre simulering:
 
 ---
 

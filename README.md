@@ -13,6 +13,6 @@ Simuleringen kobler sammen:
 
 - Kinematikk og kontroll av **mobil base (båt med to thrustere)**
 - Kinematikk og bevegelse for **robotarm** (plast-håv)
-- **Navigasjon og kontroll** (f.eks. LOS/PID) for å følge bane og/eller søkemønster
-- **Sensordata og estimat** (IMU, strøm, EKF – der det er aktivert i koden)
+- **Navigasjon og kontroll** (LOS/PID) for å følge bane og/eller søkemønster
+- **Sensordata og estimat** (IMU, strøm, EKF)
 - Visualisering av båt- og armbevegelse over tid

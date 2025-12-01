@@ -15,7 +15,7 @@ function robot = boat_arm_model()
     L4 = Link([0     d4  a4  alpha_4 0]);
     L5 = Link([0     d5  a5  alpha_5 0]);
 
-    % Offsets slik du hadde
+    % Offsets
     L2.offset = -pi/2;
     L4.offset =  pi/2;
 
@@ -25,3 +25,4 @@ function robot = boat_arm_model()
     %% ---------- TOOL / HÅV ----------
     robot.tool = transl(0, 0, 0.20);  % håven/håndleddet stikker 20 cm ut
 end
+

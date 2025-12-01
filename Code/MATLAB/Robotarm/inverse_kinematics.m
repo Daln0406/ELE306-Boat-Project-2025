@@ -12,6 +12,8 @@ L2 = Link([0 d2 a2 alpha_2 0]);
 L3 = Link([0 d3 a3 alpha_3 0]);
 L4 = Link([0 d4 a4 alpha_4 0]);
 L5 = Link([0 d5 a5 alpha_5 0]);
+
+% Offset på leddvinkler fra DH-tabellen
 L2.offset = -pi/2;
 L4.offset = pi/2;
 

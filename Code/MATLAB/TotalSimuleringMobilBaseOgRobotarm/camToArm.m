@@ -5,8 +5,7 @@ function pA = camToArm(pC, boatPose, T_BC, T_BA)
 % INPUT:
 %   pC       = [xC; yC; zC]  (plast-posisjon i kamera-koordinater)
 %   boatPose = [xB, yB, psiB]  (båtens posisjon/orientering i world)
-%              (N.B.: Vi trenger psiB for rotasjon B, ellers kan denne
-%                     forenkles hvis A og C er definert i B-frame uten yaw)
+
 %   T_BC     = transformasjon C -> B
 %   T_BA     = transformasjon A -> B
 %
@@ -31,3 +30,4 @@ function pA = camToArm(pC, boatPose, T_BC, T_BA)
     pA_h = T_AB * pB_h;
     pA   = pA_h(1:3);
 end
+

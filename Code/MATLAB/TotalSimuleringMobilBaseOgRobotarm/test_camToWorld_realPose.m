@@ -16,7 +16,6 @@ boatPose = [xB, yB, psiB];
 
 % 3) Sett et punkt i kamera-frame
 % F.eks. kamera oppdager plast 1 meter frem og 0.1 meter ned
-% (zC tilpasses kamerahøyden)
 pC = [1.0; 0.0; 0.0];
 
 fprintf("pC (Camera-frame):   [%.2f, %.2f, %.2f]\n", pC);
@@ -63,3 +62,4 @@ plot(pW(1), pW(2), 'ro', 'MarkerSize',10, 'LineWidth',2);
 text(pW(1), pW(2), '  Plastic');
 
 axis equal
+

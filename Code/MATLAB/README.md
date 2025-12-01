@@ -48,6 +48,6 @@ Kjøring av simulink:
   1. kjør init_boat
   2. kjør boat_pp_diff
 
-## 3. [`LatticeScript/`](https://github.com/Daln0406/ELE306-Boat-Project-2025/tree/main/Code/MATLAB/LatticeScript)
+## 3. [`LatticeScript/`](https://github.com/Daln0406/ELE306-Boat-Project-2025/tree/main/Code/MATLAB/Lattice%20Script)
 Enkle lattice program som er brukt i startfasen og implementert for ruteplanleggingen senere ved fullverdig simulering. 
 

@@ -62,5 +62,6 @@ T_num = double(subs(OT4, ...
 % Forward kinematics
 T_fk = robot4DOF.fkine(q).T;
 
+% Sammenligning av utregnet forward kinematics og toolbox-fkine
 fprintf('\nForskjell (OT4 - fkine):\n');
 vpa(T_num - T_fk, 6)
